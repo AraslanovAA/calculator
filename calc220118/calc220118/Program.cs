@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using calc220118;
 
 namespace calc220118
 {
@@ -12,10 +13,13 @@ namespace calc220118
         {
             Console.WriteLine("Список команд: ");
             Console.WriteLine("Summ - сложение\nSub  - вычитание\nDiv  - деление\nMult - умножение\nPow2 - возведение в квардрат\nPow3 - возведение в куб\n/help - список команд");
+           
         }
 
-        static void ReadNumb(int index)
+        static void ReadNumb(string operation)
         {
+
+            /*РУДИМЕНТ))0)
             double x_ = 0, y_ = 0;
             if ((index == 4) || (index == 5))//если используем функции одной переменной
             {
@@ -43,17 +47,11 @@ namespace calc220118
                     }
                 }
             }
+            */
+            string s1 = Console.ReadLine();//почекать потом эксепшны
+            string[] args = s1.Split(' ');
             var UseCalc = new Calc();
-            switch (index)
-            {
-                case 0: Console.WriteLine(UseCalc.Summ(x_, y_)); break;
-                case 1: Console.WriteLine(UseCalc.Sub(x_, y_)); break;
-                case 2: if ((UseCalc.Div(x_, y_) == 1) & (x_ != y_)) { Console.ForegroundColor = ConsoleColor.Red; Console.WriteLine("Деление на 0"); Console.ResetColor(); } else Console.WriteLine(UseCalc.Div(x_, y_)); break;
-                case 3: Console.WriteLine(UseCalc.mult(x_, y_)); break;
-                case 4: Console.WriteLine(UseCalc.pow2(x_)); break;
-                case 5: Console.WriteLine(UseCalc.pow3(x_)); break;
-                case 6: Help(); break;
-            }
+            if (operation == "/help") { UseCalc.ShowOperations(); } else { Console.WriteLine(UseCalc.Exec(operation, args)); }
         }
 
         static void Main(string[] args)
@@ -89,12 +87,8 @@ namespace calc220118
                         Console.WriteLine("Консольный калькулятор");
                         Help();
                     }
-                    while (index == -1)
-                    {
-                        string operation = Console.ReadLine();
-                        index = Array.IndexOf(operations, operation.ToLower());
-                    }
-                    ReadNumb(index);
+                    string operation = Console.ReadLine();
+                    ReadNumb(operation);
                 }
                 firstTime++;//после первого раза нельзя попасть в ветку аргументов командной строки,
                             //а также при новом круге не будет выводиться список команд
