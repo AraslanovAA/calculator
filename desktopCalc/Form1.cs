@@ -22,15 +22,15 @@ namespace desktopCalc
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            LbOperations.Items.Clear();
-            LbOperations.Items.AddRange(Calc.ShowOperations());//в чем ошибка?!
+            LbOperations_old.Items.Clear();
+            LbOperations_old.Items.AddRange(Calc.ShowOperations());//в чем ошибка?!
         }
 
 
 
         private void lbOperations_SelectedIndexChanged(object sender, EventArgs e)
         {
-            tbInPut.Enabled = LbOperations.SelectedItem != null;
+            tbInPut.Enabled = LbOperations_old.SelectedItem != null;
         }
 
         private void tbInPut_TextChanged(object sender, EventArgs e)
@@ -40,14 +40,24 @@ namespace desktopCalc
 
         private void btnCalc_Click(object sender, EventArgs e)
         {
-            if (LbOperations.SelectedItem == null)
+            if (LbOperations_old.SelectedItem == null)
             {
                 return;
             }
-            var oper = LbOperations.SelectedItem.ToString();
+            var oper = LbOperations_old.SelectedItem.ToString();
 
             var result = Calc.Exec(oper, tbInPut.Text.Trim().Split(' '));//погуглить
             label3.Text = result.ToString();
+        }
+
+        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void flat1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
