@@ -40,6 +40,8 @@ namespace calc220118
                                                  // var cur_Assemly = Assembly.GetExecutingAssembly();//список типов которые у нас есть 
 
             //директория где лежит exe-шник
+            var curAssemly = Assembly.GetExecutingAssembly();
+            LoadOperations(curAssemly);
             var pathExtenions = Path.Combine(Environment.CurrentDirectory,"extensions1");
 
             //проверяем наличие файла
@@ -65,13 +67,9 @@ namespace calc220118
             */
         }
         private IList<Ioperation> Operations;
-        public void ShowOperations()
+        public string[] ShowOperations()
         {
-            foreach(var item in Operations)
-            {
-                Console.WriteLine(item.name);
-                //operation.Select(o => o.name).ToArray();
-            }
+             return   Operations.Select(o => o.name).ToArray();   
         }
 
         public  double Exec(string OperationName, string[] args)
@@ -79,23 +77,8 @@ namespace calc220118
             Ioperation oper;
 
 
-
-            //найти опреацию в списке операций
-           /* foreach(var item in Operations)
-            {
-                if (item.name == OperationName)
-                    {
-                    oper = item;
-                    break;
-                }
-            }*/
             oper = Operations.FirstOrDefault(it => it.name == OperationName);
-            /*
- it =>it.Name == operationName
-bool Func(Ioeration it, string operationName){
-return it.Name == operationName;
-}
- */
+
             //если не удалось найти - возвращаем NaN
             if (oper == null)
             {

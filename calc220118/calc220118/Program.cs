@@ -16,42 +16,17 @@ namespace calc220118
            
         }
 
-        static void ReadNumb(string operation)
+        static double ReadNumb(string operation)
         {
 
-            /*РУДИМЕНТ))0)
-            double x_ = 0, y_ = 0;
-            if ((index == 4) || (index == 5))//если используем функции одной переменной
-            {
-                Console.Write("Введите число: ");
-
-                while (!double.TryParse(Console.ReadLine(), out x_))
-                    Console.Write("Попробуйте снова: ");
-
-            }
-            if (index <= 3)//при использовании функции двух переменных
-            {
-
-                Console.WriteLine("Через пробел введите 2 числа: ");
-                bool key = false;
-                int index_space; string s1;
-                while (key == false)
-                {
-                    s1 = Console.ReadLine();
-                    index_space = s1.IndexOf(' ');//убеждаемся, что в строке имеется пробел, чтобы избежать rangeexeption при split
-                    if (index_space != -1)
-                    {
-                        string[] split = s1.Split(' ');
-                        if ((double.TryParse(split[0], out x_)) & (double.TryParse(split[1], out y_)))//если числа считаны успешно продолжаем работу
-                            key = true;
-                    }
-                }
-            }
-            */
+          
             string s1 = Console.ReadLine();//почекать потом эксепшны
             string[] args = s1.Split(' ');
             var UseCalc = new Calc();
-            if (operation == "/help") { UseCalc.ShowOperations(); } else { Console.WriteLine(UseCalc.Exec(operation, args)); }
+            if (operation == "/help")
+            { string[] opers = UseCalc.ShowOperations(); foreach (var item in opers) { Console.WriteLine(item); } return 0; }
+            else
+            { double result = UseCalc.Exec(operation, args); return result; }
         }
 
         static void Main(string[] args)
@@ -85,10 +60,11 @@ namespace calc220118
                     if ((firstTime == 0) || ((firstTime ==1) && (args.Length!=0)))
                     {
                         Console.WriteLine("Консольный калькулятор");
-                        Help();
+                      //  Help();
                     }
                     string operation = Console.ReadLine();
-                    ReadNumb(operation);
+                   var res =  ReadNumb(operation);
+                    Console.WriteLine(res);
                 }
                 firstTime++;//после первого раза нельзя попасть в ветку аргументов командной строки,
                             //а также при новом круге не будет выводиться список команд
