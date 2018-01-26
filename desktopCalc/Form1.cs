@@ -59,5 +59,22 @@ namespace desktopCalc
         {
 
         }
+        
+        #region Сохранение в БД
+
+        var or = new OperationResult()
+        {
+            OperationId = lbOperations.SelectedIndex,
+            Result = result,
+            ExecutionTime = new Random().Next(100, 4000),
+            Error = "",
+            Args = tbInput.Text.Trim()
+        };
+
+        var operResultRepository = new OperResultRepository();
+        operResultRepository.Save(or);
+
+            #endregion
+           
     }
 }
